@@ -10,9 +10,6 @@ import org.YiiCommunity.GitterBot.utils.L;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Alex on 10/20/15.
- */
 public class ThankYou extends Command {
     private List<String> words;
 
