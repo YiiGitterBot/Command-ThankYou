@@ -35,12 +35,18 @@ public class ThankYou extends Command {
                         sent.add(mention.screenName);
 
                         if (mention.screenName.equals(message.fromUser.username)) {
-                            Gitter.sendMessage("*@" + message.fromUser.username + " самолайк? Как вульгарно!*");
+                            Gitter.sendMessage(getConfig().getString("selfThanks", "*@{username} selflike? How vulgar!*").replace("{username}", message.fromUser.username));
                             continue;
                         }
                         User receiver = User.getUser(mention.screenName);
                         receiver.changeCarma(1, giver, message.text);
-                        Gitter.sendMessage("*Спасибо (+1) для @" + receiver.getUsername() + " принято! Текущая карма **" + (receiver.getCarma() >= 0 ? "+" : "-") + receiver.getCarma() + "**.*");
+                        Gitter.sendMessage(
+                                getConfig()
+                                        .getString("thanks", "*Thanks (+1) to @{receiver} accepted! Now his carma **{carma}**.*")
+                                        .replace("{receiver}", receiver.getUsername())
+                                        .replace("{giver}", message.fromUser.username)
+                                        .replace("{carma}", (receiver.getCarma() >= 0 ? "+" : "-") + receiver.getCarma())
+                        );
                         receiver.updateAchievements();
                     }
                     break;
