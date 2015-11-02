@@ -1,3 +1,4 @@
+minTimeBetweenThanks: 60 # in seconds
 words:
     - Thank
     - Thanks
@@ -17,3 +18,4 @@ words:
 messages:
     selfThanks: "*@{username} selflike? How vulgar!*"
     thanks: "*Thanks (+1) to @{receiver}* accepted! Now his carma **{carma}**.*"
+    tooSoon: "You tried to change @{receiver} carma too often. Canceling."

@@ -4,6 +4,7 @@ import com.amatkivskiy.gitter.rx.sdk.model.response.message.MessageResponse;
 import com.amatkivskiy.gitter.rx.sdk.model.response.room.Mention;
 import org.YiiCommunity.GitterBot.api.Command;
 import org.YiiCommunity.GitterBot.containers.Gitter;
+import org.YiiCommunity.GitterBot.models.database.CarmaHistory;
 import org.YiiCommunity.GitterBot.models.database.User;
 import org.YiiCommunity.GitterBot.utils.L;
 
@@ -35,14 +36,26 @@ public class ThankYou extends Command {
                         sent.add(mention.screenName);
 
                         if (mention.screenName.equals(message.fromUser.username)) {
-                            Gitter.sendMessage(getConfig().getString("selfThanks", "*@{username} selflike? How vulgar!*").replace("{username}", message.fromUser.username));
+                            Gitter.sendMessage(getConfig().getString("messages.selfThanks", "*@{username} selflike? How vulgar!*").replace("{username}", message.fromUser.username));
                             continue;
                         }
                         User receiver = User.getUser(mention.screenName);
+
+                        if (System.currentTimeMillis() / 1000 - CarmaHistory.getLastThankYou(giver, receiver) < getConfig().getInt("minTimeBetweenThanks")) {
+                            Gitter.sendMessage(
+                                    getConfig()
+                                            .getString("messages.tooSoon", "*Thanks (+1) to @{receiver} accepted! Now his carma **{carma}**.*")
+                                            .replace("{receiver}", receiver.getUsername())
+                                            .replace("{giver}", message.fromUser.username)
+                            );
+                            return;
+                        }
+
+
                         receiver.changeCarma(1, giver, message.text);
                         Gitter.sendMessage(
                                 getConfig()
-                                        .getString("thanks", "*Thanks (+1) to @{receiver} accepted! Now his carma **{carma}**.*")
+                                        .getString("messages.thanks", "*Thanks (+1) to @{receiver} accepted! Now his carma **{carma}**.*")
                                         .replace("{receiver}", receiver.getUsername())
                                         .replace("{giver}", message.fromUser.username)
                                         .replace("{carma}", (receiver.getCarma() >= 0 ? "+" : "-") + receiver.getCarma())
