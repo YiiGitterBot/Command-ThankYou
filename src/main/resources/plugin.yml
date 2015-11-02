@@ -1,5 +1,5 @@
 minTimeBetweenThanks: 60 # in seconds
-words:
+words: # lowercase only!
     - thank
     - thanks
     - спасибо
