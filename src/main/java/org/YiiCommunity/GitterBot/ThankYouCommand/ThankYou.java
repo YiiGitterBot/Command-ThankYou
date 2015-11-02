@@ -46,7 +46,7 @@ public class ThankYou extends Command {
                         if (System.currentTimeMillis() / 1000 - CarmaHistory.getLastThankYou(giver, receiver) < getConfig().getInt("minTimeBetweenThanks")) {
                             Gitter.sendMessage(
                                     getConfig()
-                                            .getString("messages.tooSoon", "*Thanks (+1) to @{receiver} accepted! Now his carma **{carma}**.*")
+                                            .getString("messages.tooSoon", "You tried to change @{receiver} carma too often. Canceling.")
                                             .replace("{receiver}", receiver.getUsername())
                                             .replace("{giver}", message.fromUser.username)
                             );
