@@ -63,6 +63,7 @@ public class ThankYou extends Command {
                                         .replace("{carma}", (receiver.getCarma() >= 0 ? "+" : "-") + receiver.getCarma())
                         );
                         receiver.updateAchievements();
+                        giver.updateAchievements();
                     }
                     break;
                 }
