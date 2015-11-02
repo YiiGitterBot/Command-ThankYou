@@ -24,8 +24,10 @@ public class ThankYou extends Command {
             return;
 
         try {
+            String text = message.text.replaceAll("[^a-zA-Z0-9@\\s]", "").toLowerCase();
+            L.$D(text);
             for (String item : words) {
-                if (message.text.toLowerCase().startsWith(item) || message.text.toLowerCase().endsWith(item)) {
+                if (text.startsWith(item) || text.endsWith(item)) {
                     User giver = User.getUser(message.fromUser.username);
 
                     ArrayList<String> sent = new ArrayList<String>();
