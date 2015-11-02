@@ -1,19 +1,9 @@
 minTimeBetweenThanks: 60 # in seconds
 words:
-    - Thank
-    - Thanks
-    - Спасибо
     - thank
     - thanks
     - спасибо
     - спс
-    - СПС
-    - Спс
-    - THX
-    - TNX
-    - Thx
-    - thx
-    - Tnx
     - tnx
 messages:
     selfThanks: "*@{username} selflike? How vulgar!*"
