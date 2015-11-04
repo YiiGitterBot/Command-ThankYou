@@ -6,7 +6,7 @@
 
     <groupId>org.YiiCommunity.GitterBot</groupId>
     <artifactId>ThankYouCommand</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.github.YiiGitterBot</groupId>
             <artifactId>YiiGitterBot</artifactId>
-            <version>1.1.2</version>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 
