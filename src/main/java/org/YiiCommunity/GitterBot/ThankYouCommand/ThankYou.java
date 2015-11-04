@@ -55,7 +55,7 @@ public class ThankYou extends Command {
                         }
 
 
-                        receiver.changeCarma(1, giver, message.text);
+                        receiver.changeCarma(1, giver, message.text, room);
                         Gitter.sendMessage(room,
                                 getConfig()
                                         .getString("messages.thanks", "*Thanks (+1) to @{receiver} accepted! Now his carma **{carma}**.*")
