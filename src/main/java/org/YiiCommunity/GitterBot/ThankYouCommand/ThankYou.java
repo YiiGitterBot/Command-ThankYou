@@ -42,6 +42,15 @@ public class ThankYou extends Command {
                             continue;
                         }
                         User receiver = User.getUser(mention.screenName);
+                        if (receiver == null) {
+                            Gitter.sendMessage(room,
+                                    getConfig()
+                                            .getString("messages.userNotFound", "User @{username} not found!")
+                                            .replace("{username}", mention.screenName)
+                                            .replace("{giver}", message.fromUser.username)
+                            );
+                            continue;
+                        }
 
                         if (System.currentTimeMillis() / 1000 - CarmaHistory.getLastThankYou(giver, receiver) < getConfig().getInt("minTimeBetweenThanks", 60)) {
                             Gitter.sendMessage(room,
