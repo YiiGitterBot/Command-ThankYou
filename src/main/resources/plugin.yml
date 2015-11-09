@@ -1,4 +1,5 @@
 minTimeBetweenThanks: 60 # in seconds
+denyThanksIfNotInRoom: true
 words: # lowercase only!
     - thank
     - thanks

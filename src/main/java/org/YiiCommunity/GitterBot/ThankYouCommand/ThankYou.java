@@ -1,5 +1,6 @@
 package org.YiiCommunity.GitterBot.ThankYouCommand;
 
+import com.amatkivskiy.gitter.rx.sdk.model.response.UserResponse;
 import com.amatkivskiy.gitter.rx.sdk.model.response.message.MessageResponse;
 import com.amatkivskiy.gitter.rx.sdk.model.response.room.Mention;
 import com.amatkivskiy.gitter.rx.sdk.model.response.room.RoomResponse;
@@ -41,6 +42,25 @@ public class ThankYou extends Command {
                             Gitter.sendMessage(room, getConfig().getString("messages.selfThanks", "*@{username} selflike? How vulgar!*").replace("{username}", message.fromUser.username));
                             continue;
                         }
+
+                        if (getConfig().getBoolean("denyThanksIfNotInRoom", false)) {
+                            boolean exists = false;
+                            for (UserResponse userItem : Gitter.getUsersInRoom(room.id)) {
+                                if (userItem.username.equalsIgnoreCase(mention.screenName))
+                                    exists = true;
+                            }
+
+                            if (!exists) {
+                                Gitter.sendMessage(room,
+                                        getConfig()
+                                                .getString("messages.userNotFound", "User @{username} not found!")
+                                                .replace("{username}", mention.screenName)
+                                                .replace("{giver}", message.fromUser.username)
+                                );
+                                continue;
+                            }
+                        }
+
                         User receiver = User.getUser(mention.screenName);
                         if (receiver == null) {
                             Gitter.sendMessage(room,
