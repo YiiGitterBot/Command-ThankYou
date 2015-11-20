@@ -1,9 +1,9 @@
 package org.YiiCommunity.GitterBot.ThankYouCommand;
 
-import com.amatkivskiy.gitter.rx.sdk.model.response.UserResponse;
-import com.amatkivskiy.gitter.rx.sdk.model.response.message.MessageResponse;
-import com.amatkivskiy.gitter.rx.sdk.model.response.room.Mention;
-import com.amatkivskiy.gitter.rx.sdk.model.response.room.RoomResponse;
+import com.amatkivskiy.gitter.sdk.model.response.UserResponse;
+import com.amatkivskiy.gitter.sdk.model.response.message.MessageResponse;
+import com.amatkivskiy.gitter.sdk.model.response.room.Mention;
+import com.amatkivskiy.gitter.sdk.model.response.room.RoomResponse;
 import org.YiiCommunity.GitterBot.api.Command;
 import org.YiiCommunity.GitterBot.containers.Gitter;
 import org.YiiCommunity.GitterBot.models.database.CarmaHistory;
